@@ -3,7 +3,7 @@
 #include <linux/ip.h>
 #include <bpf/bpf_helpers.h>
 
-#define THRESHOLD 550 // Max packets per second
+#define THRESHOLD 350 // Max packets per second
 #define TIME_WINDOW_NS 1000000000 // 1 second in nanoseconds
 
 struct rate_limit_entry {
