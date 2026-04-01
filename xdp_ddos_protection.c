@@ -16,21 +16,19 @@ struct rate_limit_entry {
 
 // Set of destination IPs to protect (value is unused, just a flag)
 // Managed from userspace — add/remove IPs without restarting the program
-struct {
-    __uint(type, BPF_MAP_TYPE_HASH);
-    __uint(max_entries, 1024);
-    __type(key, __u32);       // Destination IP (network byte order)
-    __type(value, __u8);      // Dummy value (1 = active)
-    __uint(pinning, LIBBPF_PIN_BY_NAME);  // Pin so userspace can access
-} protected_ips SEC(".maps");
+struct bpf_map_def SEC("maps") protected_ips = {
+    .type = BPF_MAP_TYPE_HASH,
+    .key_size = sizeof(__u32),
+    .value_size = sizeof(__u8),
+    .max_entries = 1024,
+};
 
-// Per-source-IP rate limiter (only for traffic hitting protected IPs)
-struct {
-    __uint(type, BPF_MAP_TYPE_LRU_HASH);
-    __uint(max_entries, 65536);
-    __type(key, __u64);       // Composite key: (src_ip << 32) | dst_ip
-    __type(value, struct rate_limit_entry);
-} rate_limit_map SEC(".maps");
+struct bpf_map_def SEC("maps") rate_limit_map = {
+    .type = BPF_MAP_TYPE_LRU_HASH,
+    .key_size = sizeof(__u64),
+    .value_size = sizeof(struct rate_limit_entry),
+    .max_entries = 65536,
+};
 
 // ── Helpers ─────────────────────────────────────────────────────────────
 
