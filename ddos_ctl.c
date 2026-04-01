@@ -20,6 +20,8 @@
 #include <arpa/inet.h>
 #include <bpf/libbpf.h>
 #include <bpf/bpf.h>
+#include <unistd.h>
+
 
 /*
  * Default pinned map path.  When you load the XDP object with libbpf and
@@ -151,7 +153,7 @@ static int cmd_list(int map_fd) {
 }
 
 static int cmd_flush(int map_fd) {
-    __u32 key, next_key;
+    __u32 next_key;
     int count = 0;
 
     while (bpf_map_get_next_key(map_fd, NULL, &next_key) == 0) {
