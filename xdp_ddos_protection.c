@@ -3,7 +3,7 @@
 #include <linux/ip.h>
 #include <bpf/bpf_helpers.h>
 
-#define THRESHOLD 350              // Max packets per second
+#define THRESHOLD 50000              // Max packets per second
 #define TIME_WINDOW_NS 1000000000ULL  // 1 second
 #define INACTIVE_TIMEOUT (300ULL * TIME_WINDOW_NS) // 5 minutes
 
