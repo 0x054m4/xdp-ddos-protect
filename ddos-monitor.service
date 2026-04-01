@@ -1,0 +1,26 @@
+[Unit]
+Description=DDoS Target Monitor and Auto-Protection Service
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStartPre=/usr/bin/mkdir -p /tmp/ddos-protected
+ExecStart=/usr/local/bin/ddos-monitor.sh
+ExecStopPost=/bin/bash -c 'rm -rf /tmp/ddos-protected'
+Restart=on-failure
+RestartSec=5
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=ddos-monitor
+
+# Security hardening
+ProtectSystem=strict
+ReadWritePaths=/tmp/ddos-protected /var/log
+PrivateTmp=false
+NoNewPrivileges=no
+
+[Install]
+WantedBy=multi-user.target
