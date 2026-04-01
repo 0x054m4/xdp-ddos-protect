@@ -18,7 +18,7 @@ SyslogIdentifier=ddos-monitor
 
 # Security hardening
 ProtectSystem=strict
-ReadWritePaths=/tmp/ddos-protected /var/log
+ReadWritePaths=/tmp /var/log
 PrivateTmp=false
 NoNewPrivileges=no
 
