@@ -17,11 +17,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
+#include <unistd.h>
 #include <arpa/inet.h>
 #include <bpf/libbpf.h>
 #include <bpf/bpf.h>
-#include <unistd.h>
-
 
 /*
  * Default pinned map path.  When you load the XDP object with libbpf and
