@@ -42,7 +42,7 @@ while true; do
     TMP_FILE="/tmp/dest_ips.txt"
 
     # Capture traffic snapshot
-    tcpdump -nn -i "$IFACE" -c "$CAPTURE_COUNT" 2>/dev/null | \
+    tcpdump -nn -Q in -i "$IFACE" -c "$CAPTURE_COUNT" 2>/dev/null | \
         awk '{print $5}' | cut -d'.' -f1-4 | \
         grep -E '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$' | \
         sort | uniq -c | sort -nr > "$TMP_FILE"
