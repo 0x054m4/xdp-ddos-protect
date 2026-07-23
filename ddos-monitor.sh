@@ -14,7 +14,7 @@ INTERVAL=3
 THRESHOLD=3000
 
 # Protection is removed when traffic stays below this PPS
-RECOVERY_THRESHOLD=2000
+RECOVERY_THRESHOLD=1000
 
 # Number of consecutive low-traffic intervals before recovery
 RECOVERY_HITS=3
