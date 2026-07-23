@@ -163,19 +163,13 @@ while true; do
 
             # Address with port:
             # 192.0.2.10.443
-            if (
-                destination ~ \
-                /^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$/
-            ) {
+            if (destination ~ /^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$/) {
                 sub(/\.[0-9]+$/, "", destination)
             }
 
             # Address without port:
             # 192.0.2.10
-            if (
-                destination ~ \
-                /^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$/
-            ) {
+            if (destination ~ /^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$/) {
                 counts[destination]++
             }
 
